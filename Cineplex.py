@@ -86,7 +86,6 @@ def totalAlert():
 
 while(ticketsOnSale == False):
     resp = requests.get(ticketsPurchaseLink)
-
     html = resp.content
     soup = BeautifulSoup(html, "html.parser")
 
@@ -95,15 +94,17 @@ while(ticketsOnSale == False):
     # print(option_tags)
     now = datetime.datetime.now()
     nowFormatted = now.strftime(("%m-%d-%Y %H:%M")) 
+    
+    passNumber += 1
+    print(Fore.YELLOW + "Request #" + str(passNumber))
+    
     if("No movies" in str(div_1)):
         ticketsOnSale = False
-        print(Fore.BLACK + f"{nowFormatted}: Tickets are not on sale yet.")
+        print(Fore.BLUE + f"{nowFormatted}: " + Fore.LIGHTGREEN_EX + "Tickets are not on sale yet.")
     else:
         ticketsOnSale = True
-        print(Fore.RED + f"TICKETS NOW ON SALE! - Released at {nowFormatted}")
+        print(Fore.RED + f"TICKETS NOW ON SALE! - " + Fore.MAGENTA + "Released at {nowFormatted}")
 
-    passNumber += 1
-    print("Request #" + str(passNumber))
     time.sleep(60)
     
 emailAlert()
