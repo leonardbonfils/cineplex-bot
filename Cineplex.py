@@ -8,9 +8,66 @@ from email.message import EmailMessage
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from colorama import Fore, Back, Style
+import json
 
 ticketsOnSale = False
 passNumber = 0
+thisYearsRelease = None
+nextYearsRelease = None
+
+# ask the user what movie he wants to monitor
+# search for current year and (current year + 1) movies with that name
+# user chooses a movie
+moviesBaseURL = "http://www.omdbapi.com/?apikey=24712c16"
+print(Fore.YELLOW + "Would you like to monitor a specific date (1) or search for a movie?")
+monitoringChoice = input()
+# for a date, skip all this movie shit, if not, execute the movie shit
+print(Fore.YELLOW + "What movie would you like to monitor tickets for?" + Fore.BLUE)
+movieToWatchInput = input()
+print(Fore.LIGHTGREEN_EX + "Searching for movies with that name..." + Fore.RESET)
+
+current_year = datetime.date.today().year
+current_month = datetime.date.today().month
+currentYearMovies = requests.request('GET', moviesBaseURL + '&t=' + movieToWatchInput + '&y=' +  str(current_year))
+nextYearMovies 	  = requests.request('GET', moviesBaseURL + '&t=' + movieToWatchInput + '&y=' +  str(current_year + 1))
+parsedCYMovie = json.loads(currentYearMovies.content)
+print(json.dumps(parsedCYMovie, indent=4))
+parsedNYMovie = json.loads(nextYearMovies.content)
+
+if parsedCYMovie["Response"] == "True":
+	thisYearsRelease = parsedCYMovie["Released"]
+if parsedNYMovie["Response"] == "True":
+	nextYearsRelease = parsedNYMovie["Released"]
+
+
+movieFound = 1
+
+while movieFound == 1 or movieFound == 2 or movieFound == 'n' or movieFound == 'N':
+
+	if thisYearsRelease != "N/A" and nextYearsRelease != "N/A" and current_month >= 11 :
+		print(Fore.YELLOW + "Which of these two movies are you looking to monitor? Enter '1' or '2'.")
+		print(Fore.BLUE + "--> 1. " + parsedCYMovie["Title"] + " , coming out on " + Fore.RED + thisYearsRelease + ".")
+		print(Fore.BLUE + "--> 2. '" + parsedNYMovie["Title"] + "', coming out on " + nextYearsRelease + ".")
+		movieFound = input()
+	elif thisYearsRelease != "N/A" and nextYearsRelease == "N/A":
+		print(Fore.YELLOW + "Is this the movie you were looking for? Enter (Y/N)")
+		print(Fore.BLUE + "--> '" + parsedCYMovie["Title"] + "', coming out on " + Fore.RED + thisYearsRelease + ".")
+		movieFound = input()
+	elif thisYearsRelease == "N/A" and nextYearsRelease != "N/A":
+		print(Fore.YELLOW + "Is this the movie you were looking for? Enter (Y/N)")
+		print(Fore.BLUE + "--> '" + parsedNYMovie["Title"] + "', coming out on " + Fore.RED + nextYearsRelease + ".")
+		movieFound = input()
+	else:
+		print("Found no movies with that name. Press '1' to search a different movie. Press '3' to shutdown.")
+		movieFound = input()
+		exit()
+
+# add a while
+# put it all in a dictionary to keep things organized
+# grab that movie's release date and use that for the request to Cineplex
+
+
+exit()
 
 print("Enter a date to watch tickets for in MM/DD/YYYY format: ")
 dateToWatch = input()
@@ -85,8 +142,8 @@ def totalAlert():
     phoneAlert()
 
 while(ticketsOnSale == False):
-    resp = requests.get(ticketsPurchaseLink)
-    html = resp.content
+    ticketsResp = requests.get(ticketsPurchaseLink)
+    html = ticketsResp.content
     soup = BeautifulSoup(html, "html.parser")
 
     # option_tags = soup.find_all("No movies are playing")
@@ -103,7 +160,7 @@ while(ticketsOnSale == False):
         print(Fore.BLUE + f"{nowFormatted}: " + Fore.LIGHTGREEN_EX + "Tickets are not on sale yet.")
     else:
         ticketsOnSale = True
-        print(Fore.RED + f"TICKETS NOW ON SALE! - " + Fore.MAGENTA + "Released at {nowFormatted}")
+        print(Fore.RED + f"TICKETS NOW ON SALE! - " + Fore.MAGENTA + f"Released at {nowFormatted}")
 
     time.sleep(60)
     
