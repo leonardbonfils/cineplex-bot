@@ -103,7 +103,7 @@ while(ticketsOnSale == False):
         print(Fore.BLUE + f"{nowFormatted}: " + Fore.LIGHTGREEN_EX + "Tickets are not on sale yet.")
     else:
         ticketsOnSale = True
-        print(Fore.RED + f"TICKETS NOW ON SALE! - " + Fore.MAGENTA + "Released at {nowFormatted}")
+        print(Fore.RED + f"TICKETS NOW ON SALE! - " + Fore.MAGENTA + "Released at f{nowFormatted}")
 
     time.sleep(60)
     
