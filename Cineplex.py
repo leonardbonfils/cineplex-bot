@@ -56,7 +56,7 @@ def emailAlert():
 							<div style="text-align:center;">
 								<h3>Hurry!</h3>
 								<p>Tickets are now on sale. Get them quick!</p>
-								<a href={ticketsPurchaseLink}>Link to buy</a>
+								<a href=f{ticketsPurchaseLink}>Link to buy</a>
 							</div>
 						</div>
 					</div>
@@ -73,7 +73,7 @@ def emailAlert():
 	# Send the message via our own SMTP server.
 	server = smtplib.SMTP('smtp.gmail.com', 587)
 	server.starttls()
-	server.login("leonard.bonfils@gmail.com", "ssbqwssycfxmpchs")
+	server.login("leonard.bonfils@gmail.com", "amtakyroepjtfmev")
 	server.send_message(msg)
 	server.quit()
 

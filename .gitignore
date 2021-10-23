@@ -130,3 +130,7 @@ dmypy.json
 
 # My test file
 test.py
+
+# AWS instance keys
+*.pem
+.bash_history
