@@ -134,3 +134,6 @@ test.py
 # AWS instance keys
 *.pem
 .bash_history
+.ssh/known_hosts
+.viminfo
+.gitconfig
