@@ -73,7 +73,7 @@ def emailAlert():
 	# Send the message via our own SMTP server.
 	server = smtplib.SMTP('smtp.gmail.com', 587)
 	server.starttls()
-	server.login("leonard.bonfils@gmail.com", "amtakyroepjtfmev")
+	server.login("your email", "your email's password")
 	server.send_message(msg)
 	server.quit()
 
