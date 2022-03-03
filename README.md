@@ -9,3 +9,8 @@ Deployed on a private AWS EC2 Ubuntu instance with multiple Linux `screen` objec
 ![image](https://user-images.githubusercontent.com/6782987/156590445-e7a208b8-f40a-484a-9413-793b050f5938.png)
 
 ![image](https://user-images.githubusercontent.com/6782987/156590456-261074bb-0d50-4bd8-8d77-0ff1a8347f40.png)
+
+## WIP Features (`develop` branch)
+
+- Alerts through phone calls (on top of email alerts)
+- OMDB API integration to allow the user to enter a movie name and the script will retrieve the release date automatically
