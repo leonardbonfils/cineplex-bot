@@ -39,8 +39,8 @@ ticketsPurchaseLink = "https://www.cineplex.com/Showtimes/any-movie/cinema-banqu
 def emailAlert():
 	msg = MIMEMultipart('alternative')
 	msg['Subject'] = 'Cineplex ' + dateToWatch + ' Tickets Alert'
-	msg['From'] = "leonard.bonfils@gmail.com"
-	msg['To'] = "l.92@icloud.com"
+	msg['From'] = "sender@gmail.com"
+	msg['To'] = "destinationemailaddress@gmail.com"
 
 	text = 'Tickets are now available'
 	html = '''
