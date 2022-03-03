@@ -96,8 +96,8 @@ ticketsPurchaseLink = "https://www.cineplex.com/Showtimes/any-movie/cinema-banqu
 def emailAlert():
 	msg = MIMEMultipart('alternative')
 	msg['Subject'] = 'Cineplex ' + dateToWatch + ' Tickets Alert'
-	msg['From'] = "leonard.bonfils@gmail.com"
-	msg['To'] = "l.92@icloud.com"
+	msg['From'] = "sender@gmail.com"
+	msg['To'] = "recipient@gmail.com"
 
 	text = 'Tickets are now available'
 	html = '''
@@ -130,7 +130,7 @@ def emailAlert():
 	# Send the message via our own SMTP server.
 	server = smtplib.SMTP('smtp.gmail.com', 587)
 	server.starttls()
-	server.login("leonard.bonfils@gmail.com", "ssbqwssycfxmpchs")
+	server.login("user", "password")
 	server.send_message(msg)
 	server.quit()
 
